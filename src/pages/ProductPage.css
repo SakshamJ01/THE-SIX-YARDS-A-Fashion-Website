@@ -1,0 +1,296 @@
+/* =========================================
+   PRODUCT PAGE
+========================================= */
+
+.product-page {
+  background: #f3efe7;
+  color: #171513;
+  min-height: 100vh;
+}
+
+
+/* =========================================
+   BACK TO COLLECTION
+========================================= */
+
+.product-page .product-back {
+  padding: 28px 7vw 20px;
+}
+
+.product-page .product-back a {
+  color: #171513;
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.product-page .product-back a:hover {
+  opacity: 0.55;
+}
+
+
+/* =========================================
+   PRODUCT LAYOUT
+========================================= */
+
+.product-page .product-detail {
+  display: grid;
+  grid-template-columns: 58% 42%;
+  min-height: 760px;
+}
+
+
+/* =========================================
+   PRODUCT IMAGE
+========================================= */
+
+.product-page .product-image {
+  width: 100%;
+  height: 760px;
+  overflow: hidden;
+}
+
+.product-page .product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* =========================================
+   PRODUCT INFORMATION
+========================================= */
+
+.product-page .product-info {
+  padding: 80px 7vw 80px 6vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+/* CATEGORY */
+
+.product-page .product-category {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8c6933;
+  margin-bottom: 22px;
+}
+
+
+/* PRODUCT NAME */
+
+.product-page .product-info h1 {
+  margin: 0;
+  max-width: 520px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(48px, 5vw, 76px);
+  line-height: 0.95;
+  font-weight: 400;
+}
+
+
+/* PRICE */
+
+.product-page .product-price {
+  margin-top: 30px;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+}
+
+
+/* DESCRIPTION */
+
+.product-page .product-description {
+  max-width: 500px;
+  margin-top: 38px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #625d54;
+}
+
+
+/* =========================================
+   DETAILS
+========================================= */
+
+.product-page .product-details {
+  margin-top: 45px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(23, 21, 19, 0.18);
+  max-width: 500px;
+}
+
+.product-page .product-details span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.product-page .product-details p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #625d54;
+}
+
+
+/* =========================================
+   QUANTITY
+========================================= */
+
+.product-page .quantity-selector {
+  margin-top: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 500px;
+}
+
+.product-page .quantity-selector > span {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.product-page .quantity-controls {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(23, 21, 19, 0.25);
+}
+
+.product-page .quantity-controls button {
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.product-page .quantity-controls span {
+  width: 38px;
+  text-align: center;
+  font-size: 13px;
+}
+
+
+/* =========================================
+   ACTION BUTTONS
+========================================= */
+
+.product-page .product-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+  max-width: 500px;
+}
+
+.product-page .product-actions button {
+  flex: 1;
+  height: 54px;
+  border: 1px solid #171513;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.product-page .add-to-bag {
+  background: #171513;
+  color: #f3efe7;
+}
+
+.product-page .add-to-bag:hover {
+  background: transparent;
+  color: #171513;
+}
+
+.product-page .buy-now {
+  background: transparent;
+  color: #171513;
+}
+
+.product-page .buy-now:hover {
+  background: #171513;
+  color: #f3efe7;
+}
+
+
+/* =========================================
+   PRODUCT NOTE
+========================================= */
+
+.product-page .product-note {
+  margin-top: 24px;
+  font-size: 11px;
+  color: #777064;
+  font-style: italic;
+}
+
+
+/* =========================================
+   PRODUCT NOT FOUND
+========================================= */
+
+.product-page .product-not-found {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f3efe7;
+}
+
+.product-page .product-not-found h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+}
+
+.product-page .product-not-found a {
+  margin-top: 20px;
+  color: #171513;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+
+  .product-page .product-back {
+    padding: 22px 6vw;
+  }
+
+  .product-page .product-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .product-page .product-image {
+    height: 75vh;
+  }
+
+  .product-page .product-info {
+    padding: 60px 6vw 80px;
+  }
+
+  .product-page .product-info h1 {
+    font-size: 48px;
+  }
+
+  .product-page .quantity-selector {
+    max-width: none;
+  }
+
+  .product-page .product-actions {
+    max-width: none;
+  }
+}

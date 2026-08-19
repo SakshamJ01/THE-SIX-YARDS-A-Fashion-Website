@@ -1800,16 +1800,10 @@
 
 .collections-grid {
   display: grid;
-
-  grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.85fr);
-
-  column-gap: 30px;
-
-  row-gap: 70px;
-
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
   align-items: start;
 }
-
 
 /* =========================================
    CARDS
@@ -1819,59 +1813,20 @@
   min-width: 0;
 }
 
-.collection-card-large {
-  grid-column: 1;
-  grid-row: span 2;
-}
-
-
-/* Heritage card */
-
-.collection-card-wide {
-  grid-column: 1 / -1;
-
-  width: 100%;
-
-  margin-top: 10px;
-}
 
 
 /* =========================================
    IMAGES
 ========================================= */
 
+
 .collection-image {
   position: relative;
-
   width: 100%;
-
+  aspect-ratio: 0.78;
   overflow: hidden;
-
   background: #dedbd5;
 }
-
-
-/* Main saree image */
-
-.collection-card-large .collection-image {
-  aspect-ratio: 0.72;
-}
-
-
-/* Right-side images */
-
-.collection-card:not(.collection-card-large):not(.collection-card-wide)
-  .collection-image {
-  aspect-ratio: 0.72;
-}
-
-
-/* Heritage */
-
-.collection-card-wide .collection-image {
-  aspect-ratio: 1.8;
-}
-
 
 /* Image */
 
@@ -1889,7 +1844,6 @@
     transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-
 /* Hover */
 
 .collection-card:hover .collection-image img {
@@ -1900,19 +1854,13 @@
 /* =========================================
    COLLECTION INFORMATION
 ========================================= */
-
 .collection-info {
+  padding-top: 18px;
+  min-height: 150px;
+
   display: flex;
-
+  flex-direction: column;
   justify-content: space-between;
-
-  align-items: flex-end;
-
-  gap: 30px;
-
-  padding-top: 20px;
-
-  border-top: 1px solid rgba(23, 23, 23, 0.18);
 }
 
 .collection-info span {

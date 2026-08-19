@@ -1,5 +1,9 @@
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import CollectionPage from "./pages/CollectionPage";
+import ProductPage from "./pages/ProductPage";
+import CartPage from "./pages/CartPage";
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -535,129 +539,85 @@ function App() {
 
   <div className="collections-grid">
 
-    {/* 01 */}
-    <article className="collection-card collection-card-large">
+   {/* 01 — WOMEN'S WEAR */}
+<article className="collection-card">
+  <div className="collection-image">
+    <img
+      src="/images/collection-sarees.jpg"
+      alt="The Six Yards women's wear collection"
+    />
+  </div>
 
-      <div className="collection-image">
-        <img
-          src="/images/collection-sarees.jpg"
-          alt="The Six Yards saree collection"
-        />
-      </div>
+  <div className="collection-info">
+    <div>
+      <span>01 / WOMEN'S WEAR</span>
 
-      <div className="collection-info">
+      <h3>
+        Women's
+        <em> Wear</em>
+      </h3>
+    </div>
 
-        <div>
-          <span>01 / SAREES</span>
-
-          <h3>
-            The Art of
-            <em> Draping</em>
-          </h3>
-        </div>
-
-        <a href="#">
-          EXPLORE
-          <span>↗</span>
-        </a>
-
-      </div>
-
-    </article>
+   <a href="/collections/womens-wear">
+  EXPLORE
+  <span>↗</span>
+</a>
+  </div>
+</article>
 
 
-    {/* 02 */}
-    <article className="collection-card">
+{/* 02 — MEN'S WEAR */}
+<article className="collection-card">
+  <div className="collection-image">
+    <img
+      src="/images/collection-mens.jpg"
+      alt="The Six Yards men's wear collection"
+    />
+  </div>
 
-      <div className="collection-image">
-        <img
-          src="/images/collection-wedding.jpg"
-          alt="Wedding saree collection"
-        />
-      </div>
+  <div className="collection-info">
+    <div>
+      <span>02 / MEN'S WEAR</span>
 
-      <div className="collection-info">
+      <h3>
+        Men's
+        <em> Wear</em>
+      </h3>
+    </div>
 
-        <div>
-          <span>02 / OCCASION</span>
-
-          <h3>
-            Celebration
-            <em> Edit</em>
-          </h3>
-        </div>
-
-        <a href="#">
-          EXPLORE
-          <span>↗</span>
-        </a>
-
-      </div>
-
-    </article>
+    <a href="/collections/mens-wear">
+  EXPLORE
+  <span>↗</span>
+</a>
+  </div>
+</article>
 
 
-    {/* 03 */}
-    <article className="collection-card">
+{/* 03 — SPECIAL COLLECTIONS */}
+<article className="collection-card">
+  <div className="collection-image">
+    <img
+    src="/images/collection-wedding.jpg"
+      alt="The Six Yards special collections"
+    />
+  </div>
 
-      <div className="collection-image">
-        <img
-          src="/images/collection-everyday.jpg"
-          alt="Everyday Indian wear collection"
-        />
-      </div>
+  <div className="collection-info">
+    <div>
+      <span>03 / SPECIAL COLLECTIONS</span>
 
-      <div className="collection-info">
+      <h3>
+        Special
+        <em> Collections</em>
+      </h3>
+    </div>
 
-        <div>
-          <span>03 / EVERYDAY</span>
-
-          <h3>
-            Everyday
-            <em> Grace</em>
-          </h3>
-        </div>
-
-        <a href="#">
-          EXPLORE
-          <span>↗</span>
-        </a>
-
-      </div>
-
-    </article>
-
-
-    {/* 04 */}
-    <article className="collection-card collection-card-wide">
-
-      <div className="collection-image">
-        <img
-          src="/images/collection-heritage.jpg"
-          alt="Heritage Indian fashion collection"
-        />
-      </div>
-
-      <div className="collection-info">
-
-        <div>
-          <span>04 / HERITAGE</span>
-
-          <h3>
-            Woven with
-            <em> Heritage</em>
-          </h3>
-        </div>
-
-        <a href="#">
-          EXPLORE
-          <span>↗</span>
-        </a>
-
-      </div>
-
-    </article>
-
+    <a href="/collections/special-collections">
+  EXPLORE
+  <span>↗</span>
+</a>
+  </div>
+</article>
   </div>
 
 </section>
@@ -753,17 +713,17 @@ function App() {
       </div>
 
 
-      <div className="footer-column">
+   <div className="footer-column">
 
-        <span>COLLECTIONS</span>
+  <span>COLLECTIONS</span>
 
-        <a href="#collections">Sarees</a>
-        <a href="#collections">Women's Wear</a>
-        <a href="#collections">Men's Wear</a>
-        <a href="#collections">Kids</a>
+  <a href="/collections/womens-wear">Women's Wear</a>
+  <a href="/collections/mens-wear">Men's Wear</a>
+  <a href="/collections/special-collections">
+    Special Collections
+  </a>
 
-      </div>
-
+</div>
 
       <div className="footer-column">
 
@@ -802,4 +762,59 @@ function App() {
   );
 }
 
-export default App;
+function AppRoutes() {
+  return (
+    <Routes>
+{/* Collection pages */}
+      <Route path="/" element={<App />} />
+
+      <Route
+        path="/collections/womens-wear"
+        element={
+          <CollectionPage
+            title="Women's Wear"
+            subtitle="Timeless silhouettes, contemporary expression."
+            description="Discover sarees, graceful silhouettes and considered pieces designed for the modern woman."
+            heroImage="/images/collection-sarees.jpg"
+          />
+        }
+      />
+
+      <Route
+        path="/collections/mens-wear"
+        element={
+          <CollectionPage
+            title="Men's Wear"
+            subtitle="Quiet confidence, rooted in tradition."
+            description="Explore refined Indian menswear crafted for celebrations, occasions and everyday elegance."
+          heroImage="/images/collection-mens.jpg"
+          />
+        }
+      />
+
+      <Route
+        path="/collections/special-collections"
+        element={
+          <CollectionPage
+            title="Special Collections"
+            subtitle="Pieces made for moments worth remembering."
+            description="Explore our curated edits of wedding, festive and heritage pieces."
+            heroImage="/images/collection-wedding.jpg"
+          />
+        }
+      />
+{/* Product page */}
+<Route
+  path="/product/:productId"
+  element={<ProductPage />}
+/>
+<Route
+  path="/cart"
+  element={<CartPage />}
+/>
+
+    </Routes>
+  );
+}
+
+export default AppRoutes;
