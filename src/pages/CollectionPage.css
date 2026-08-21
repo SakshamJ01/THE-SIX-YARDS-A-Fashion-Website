@@ -85,6 +85,42 @@ background-repeat: no-repeat;
   line-height: 1.05;
 }
 
+.subcategory-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 42px;
+}
+
+.subcategory-filters button {
+  min-height: 40px;
+  padding: 0 18px;
+  border: 1px solid rgba(23, 21, 19, 0.22);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: #171513;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.subcategory-filters button.active,
+.subcategory-filters button:hover {
+  background: #171513;
+  color: #f3efe7;
+}
+
+.collection-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 48px 0;
+  border-top: 1px solid rgba(23, 21, 19, 0.14);
+  color: #777064;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
 .product-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -111,7 +147,9 @@ background-repeat: no-repeat;
   font-size: 10px;
   letter-spacing: 0.15em;
 
-  transition: transform 0.4s ease;
+  border-radius: var(--radius-md);
+
+  transition: transform var(--duration-standard) var(--ease-standard);
 }
 
 .product-card:hover .product-image {
@@ -149,6 +187,17 @@ background-repeat: no-repeat;
   .product-grid {
     grid-template-columns: 1fr;
   }
+
+  .subcategory-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    margin-bottom: 34px;
+  }
+
+  .subcategory-filters button {
+    flex: 0 0 auto;
+  }
 }
 
 /* ================================
@@ -169,7 +218,7 @@ background-repeat: no-repeat;
   object-fit: cover;
 
   transition:
-    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transform var(--duration-slow) var(--ease-standard);
 }
 
 .product-card:hover .product-image img {
@@ -206,8 +255,12 @@ background-repeat: no-repeat;
   transform: translateY(8px);
 
   transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
+    opacity var(--duration-fast) ease,
+    transform var(--duration-fast) ease;
+}
+
+.product-wishlist[aria-pressed="true"] {
+  color: var(--color-gold);
 }
 
 .product-card:hover .product-wishlist {
@@ -264,4 +317,23 @@ background-repeat: no-repeat;
   font-size: 13px;
 
   font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .product-card .product-wishlist {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.collection-page-back {
+  padding: 24px 8vw 0;
+}
+
+.collection-page-back a {
+  color: #171513;
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
 }

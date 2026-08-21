@@ -1,3 +1,22 @@
+:root {
+  --color-ivory: #f3efe7;
+  --color-ink: #171513;
+  --color-gold: #92703b;
+  --color-muted: #777064;
+  --color-border: rgba(23, 21, 19, 0.14);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  --duration-fast: 200ms;
+  --duration-standard: 400ms;
+  --duration-slow: 700ms;
+  --duration-major: 1000ms;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -32,4 +51,15 @@ select {
 img {
   max-width: 100%;
   display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

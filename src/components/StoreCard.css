@@ -1,0 +1,116 @@
+.store-card {
+  min-width: 0;
+}
+
+.store-card-image-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.store-card-image {
+  position: relative;
+  aspect-ratio: 0.86;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: #ded8cf;
+}
+
+.store-card-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(23, 21, 19, 0.42), transparent 38%);
+  pointer-events: none;
+}
+
+.store-card-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+.store-card:hover .store-card-image img {
+  transform: scale(1.04);
+}
+
+.store-card-number,
+.store-card-arrow {
+  position: absolute;
+  z-index: 1;
+  color: #f5f2ed;
+}
+
+.store-card-number {
+  top: 18px;
+  left: 18px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+}
+
+.store-card-arrow {
+  right: 18px;
+  bottom: 18px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+  transition: background var(--duration-fast) ease, color var(--duration-fast) ease, transform var(--duration-fast) var(--ease-standard);
+}
+
+.store-card:hover .store-card-arrow {
+  background: #f5f2ed;
+  color: var(--color-ink);
+  transform: translate(2px, -2px);
+}
+
+.store-card-content {
+  padding: 20px 2px 0;
+}
+
+.store-card-eyebrow {
+  color: var(--color-gold);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+}
+
+.store-card h3 {
+  margin: 12px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(24px, 2.5vw, 34px);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.store-card p {
+  margin: 10px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.store-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  color: var(--color-ink);
+  text-decoration: none;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  transition: color var(--duration-fast) ease, gap var(--duration-fast) ease;
+}
+
+.store-card-link span {
+  color: var(--color-gold);
+  font-size: 15px;
+}
+
+.store-card-link:hover {
+  color: var(--color-gold);
+  gap: 15px;
+}

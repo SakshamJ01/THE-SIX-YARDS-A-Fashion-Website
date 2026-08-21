@@ -1,10 +1,29 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./CollectionPage.css";
 import products from "../data/products";
 import ProductCard from "../components/ProductCard";
 
 function CollectionPage({ title, subtitle, description, heroImage }) {
+  const [activeSubcategory, setActiveSubcategory] = useState("All");
+  const subcategories = {
+    "Women's Wear": ["Sarees", "Lehengas", "Suits", "Anarkalis"],
+    "Men's Wear": ["Kurtas", "Kurta Sets", "Sherwanis", "Nehru Jackets"],
+    "Special Collections": ["Wedding Edit", "Festive Edit", "Heritage", "Signature Collection"],
+  }[title];
+
+  const collectionProducts = products.filter(
+    (product) =>
+      product.category === title &&
+      (activeSubcategory === "All" || product.subcategory === activeSubcategory)
+  );
+
   return (
     <div className="collection-page">
+
+      <div className="collection-page-back">
+        <Link to="/">← BACK TO HOME</Link>
+      </div>
 
       <section
   className="collection-page-hero"
@@ -30,16 +49,38 @@ function CollectionPage({ title, subtitle, description, heroImage }) {
           <h2>{description}</h2>
         </div>
 
+        <nav className="subcategory-filters" aria-label={`${title} categories`}>
+          <button
+            className={activeSubcategory === "All" ? "active" : ""}
+            onClick={() => setActiveSubcategory("All")}
+          >
+            All
+          </button>
+          {subcategories.map((subcategory) => (
+            <button
+              key={subcategory}
+              className={activeSubcategory === subcategory ? "active" : ""}
+              onClick={() => setActiveSubcategory(subcategory)}
+            >
+              {subcategory}
+            </button>
+          ))}
+        </nav>
+
         <div className="product-grid">
 
-  {products
-    .filter((product) => product.category === title)
-    .map((product) => (
+  {collectionProducts.map((product) => (
       <ProductCard
         key={product.id}
         product={product}
       />
     ))}
+
+  {collectionProducts.length === 0 && (
+    <p className="collection-empty">
+      More pieces in this edit are being thoughtfully prepared.
+    </p>
+  )}
 
 </div>
 

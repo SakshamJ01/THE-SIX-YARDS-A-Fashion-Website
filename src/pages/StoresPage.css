@@ -1,0 +1,267 @@
+.stores-page {
+  min-height: 100vh;
+  background: var(--color-ivory);
+  color: var(--color-ink);
+}
+
+.stores-page-back {
+  padding: 24px 8vw 0;
+}
+
+.stores-page-back a {
+  color: var(--color-ink);
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.stores-hero {
+  position: relative;
+  min-height: 72vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 8vw 10vh;
+  overflow: hidden;
+  color: #f5f2ed;
+}
+
+.stores-hero-image,
+.stores-hero-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.stores-hero-image {
+  background: url("/images/stores/store-jaipur.jpg") center / cover;
+  transform: scale(1.02);
+  animation: storesImageReveal var(--duration-major) var(--ease-standard) both;
+}
+
+.stores-hero-overlay {
+  background: linear-gradient(90deg, rgba(23, 21, 19, 0.76), rgba(23, 21, 19, 0.16) 75%), linear-gradient(to top, rgba(23, 21, 19, 0.62), transparent 55%);
+}
+
+.stores-hero-content {
+  position: relative;
+  z-index: 1;
+  animation: storesContentReveal var(--duration-slow) var(--ease-standard) 180ms both;
+}
+
+.stores-hero-content > span,
+.stores-directory > .stores-intro > span,
+.stores-cta > span {
+  color: #d6b477;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.stores-hero h1 {
+  margin: 18px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(70px, 10vw, 150px);
+  font-weight: 400;
+  line-height: 0.82;
+  letter-spacing: -0.06em;
+}
+
+.stores-hero h1 em,
+.stores-intro h2 em,
+.stores-empty h2 em,
+.stores-cta h2 em {
+  font-style: italic;
+}
+
+.stores-hero p {
+  margin: 26px 0 0;
+  color: rgba(245, 242, 237, 0.78);
+  font-size: 16px;
+}
+
+.stores-directory {
+  padding: 130px 8vw 150px;
+}
+
+.stores-intro {
+  display: grid;
+  grid-template-columns: 0.55fr 1.45fr;
+  gap: 80px;
+  margin-bottom: 76px;
+}
+
+.stores-intro h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(54px, 7vw, 104px);
+  font-weight: 400;
+  line-height: 0.86;
+  letter-spacing: -0.055em;
+}
+
+.stores-intro p {
+  max-width: 570px;
+  margin: 35px 0 0;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.stores-filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.stores-filter-row > span {
+  color: var(--color-gold);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
+}
+
+.stores-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.stores-filters button {
+  min-height: 38px;
+  padding: 0 16px;
+  border: 1px solid rgba(23, 21, 19, 0.2);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-ink);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--duration-fast) ease, color var(--duration-fast) ease;
+}
+
+.stores-filters button:hover,
+.stores-filters button.active {
+  background: var(--color-ink);
+  color: var(--color-ivory);
+}
+
+.stores-filters button:focus-visible,
+.stores-page a:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+.stores-empty {
+  padding: 80px 0;
+  border-bottom: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.stores-empty > span {
+  color: var(--color-gold);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+}
+
+.stores-empty h2 {
+  margin: 22px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(52px, 7vw, 90px);
+  font-weight: 400;
+  line-height: 0.86;
+}
+
+.stores-cta {
+  padding: 130px 8vw 150px;
+  background: #171513;
+  color: #f5f2ed;
+}
+
+.stores-cta h2 {
+  margin: 24px 0 40px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(56px, 8vw, 116px);
+  font-weight: 400;
+  line-height: 0.84;
+  letter-spacing: -0.055em;
+}
+
+.stores-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: #f5f2ed;
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  transition: color var(--duration-fast) ease, gap var(--duration-fast) ease;
+}
+
+.stores-cta a span {
+  color: #d6b477;
+  font-size: 16px;
+}
+
+.stores-cta a:hover {
+  color: #d6b477;
+  gap: 20px;
+}
+
+@keyframes storesImageReveal {
+  from { opacity: 0; transform: scale(1.06); }
+  to { opacity: 1; transform: scale(1.02); }
+}
+
+@keyframes storesContentReveal {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .stores-hero {
+    min-height: 68svh;
+    padding: 0 7vw 9vh;
+  }
+
+  .stores-directory {
+    padding: 90px 7vw 110px;
+  }
+
+  .stores-intro {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 54px;
+  }
+
+  .stores-filter-row {
+    display: block;
+  }
+
+  .stores-filters {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 14px 0 8px;
+  }
+
+  .stores-filters button {
+    flex: 0 0 auto;
+  }
+
+  .stores-cta {
+    padding: 90px 7vw 110px;
+  }
+}
+
+@media (max-width: 600px) {
+  .stores-hero h1 {
+    font-size: clamp(68px, 20vw, 100px);
+  }
+}

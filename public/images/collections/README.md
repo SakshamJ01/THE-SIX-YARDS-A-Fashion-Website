@@ -1,0 +1,1 @@
+The selected collection assets are collection-womens-01.jpg, collection-womens-02.jpg, collection-mens-01.jpg, collection-mens-02.jpg, collection-special-01.jpg, and collection-special-02.jpg. Current homepage cards use each collection's 01 asset; no crossfade implementation existed before this integration.

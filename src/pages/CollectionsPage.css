@@ -1,0 +1,184 @@
+.collections-landing-page {
+  min-height: 100vh;
+  background: var(--color-ivory);
+  color: var(--color-ink);
+}
+
+.collections-landing-header {
+  padding: 28px 7vw 78px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.collections-landing-top {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.collections-home-link,
+.collections-bag-link {
+  color: var(--color-ink);
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.collections-bag-link {
+  justify-self: end;
+}
+
+.collections-landing-top > span {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+}
+
+.collections-landing-heading {
+  max-width: 900px;
+  margin: 90px auto 0;
+}
+
+.collections-landing-heading > span {
+  color: var(--color-gold);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.collections-landing-heading h1 {
+  margin: 18px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(62px, 9vw, 126px);
+  font-weight: 400;
+  line-height: 0.84;
+  letter-spacing: -0.06em;
+}
+
+.collections-landing-heading h1 em {
+  font-style: italic;
+}
+
+.collections-landing-heading p {
+  margin: 28px 0 0;
+  color: var(--color-muted);
+  font-size: 15px;
+}
+
+.collections-landing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  padding: 80px 7vw 130px;
+}
+
+.collections-landing-card {
+  min-width: 0;
+}
+
+.collections-landing-image-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.collections-landing-image {
+  position: relative;
+  aspect-ratio: 0.78;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: #ddd8cf;
+}
+
+.collections-landing-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+.collections-landing-card:hover img {
+  transform: scale(1.04);
+}
+
+.collections-landing-image > span {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  color: #f5f2ed;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+
+.collections-landing-card-content {
+  padding-top: 20px;
+}
+
+.collections-landing-card-content > span {
+  color: var(--color-gold);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+}
+
+.collections-landing-card-content h2 {
+  margin: 12px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.collections-landing-card-content p {
+  margin: 12px 0 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.collections-landing-card-content a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  color: var(--color-ink);
+  text-decoration: none;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  transition: color var(--duration-fast) ease, gap var(--duration-fast) ease;
+}
+
+.collections-landing-card-content a span {
+  color: var(--color-gold);
+  font-size: 16px;
+}
+
+.collections-landing-card-content a:hover {
+  color: var(--color-gold);
+  gap: 15px;
+}
+
+.collections-landing-page a:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+@media (max-width: 800px) {
+  .collections-landing-top > span {
+    display: none;
+  }
+
+  .collections-landing-top {
+    grid-template-columns: 1fr auto;
+  }
+
+  .collections-landing-heading {
+    margin-top: 70px;
+  }
+
+  .collections-landing-grid {
+    grid-template-columns: 1fr;
+    padding: 60px 6vw 90px;
+  }
+}

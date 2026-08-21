@@ -1,49 +1,36 @@
 import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./ProductPage.css";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../context/useCart";
+import { useWishlist } from "../context/useWishlist";
+import products from "../data/products";
+import ProductCard from "../components/ProductCard";
 
 
 function ProductPage() {
   const { productId } = useParams();
   const [quantity, setQuantity] = useState(1);
  const { addToCart } = useCart();
+ const { isWishlisted, toggleWishlist } = useWishlist();
 const navigate = useNavigate();
-  // Temporary product data
-  // We will connect this to all our products later.
-  const products = {
-    "ivory-handwoven-saree": {
-      name: "Ivory Handwoven Saree",
-      price: "₹6,499",
-      category: "SAREES",
-      image: "/images/collection-sarees.jpg",
-      description:
-        "A timeless handwoven saree crafted with understated elegance. Designed for effortless occasions and refined everyday dressing.",
-      details: "Handwoven fabric · Lightweight drape · Traditional craftsmanship",
-    },
+  const product = products.find((item) => item.slug === productId);
+  const collectionPath = product
+    ? {
+        "Women's Wear": "/collections/womens-wear",
+        "Men's Wear": "/collections/mens-wear",
+        "Special Collections": "/collections/special-collections",
+      }[product.category]
+    : "/collections";
+  const relatedProducts = product
+    ? products.filter(
+        (item) => item.category === product.category && item.id !== product.id
+      ).slice(0, 3)
+    : [];
 
-    "heritage-silk-saree": {
-      name: "Heritage Silk Saree",
-      price: "₹7,999",
-      category: "SAREES",
-      image: "/images/collection-heritage.jpg",
-      description:
-        "A rich silk saree inspired by India's timeless textile traditions, created for moments that deserve something special.",
-      details: "Pure silk · Heritage-inspired weave · Elegant finish",
-    },
-
-    "contemporary-draped-saree": {
-      name: "Contemporary Draped Saree",
-      price: "₹5,499",
-      category: "SAREES",
-      image: "/images/collection-sarees.jpg",
-      description:
-        "A contemporary interpretation of the classic saree, balancing graceful draping with modern simplicity.",
-      details: "Soft fabric · Contemporary silhouette · Easy drape",
-    },
+  const addProductToCart = () => {
+    addToCart(product, quantity);
+    navigate("/cart");
   };
-
-  const product = products[productId];
 
   // If product doesn't exist
   if (!product) {
@@ -51,8 +38,11 @@ const navigate = useNavigate();
       <div className="product-not-found">
         <h1>Product Not Found</h1>
 
-        <Link to="/collections/womens-wear">
-          Back to Women's Wear
+        <Link to="/">
+          ← BACK TO HOME
+        </Link>
+        <Link to={collectionPath}>
+          Back to collection
         </Link>
       </div>
     );
@@ -63,9 +53,10 @@ const navigate = useNavigate();
 
       {/* BACK LINK */}
       <div className="product-back">
-        <Link to="/collections/womens-wear">
+        <Link to={collectionPath}>
           ← Back to collection
         </Link>
+        <Link to="/">HOME</Link>
       </div>
 
 
@@ -77,6 +68,8 @@ const navigate = useNavigate();
           <img
             src={product.image}
             alt={product.name}
+            loading="eager"
+            fetchPriority="high"
           />
         </div>
 
@@ -84,14 +77,17 @@ const navigate = useNavigate();
         {/* INFORMATION */}
         <div className="product-info">
 
-          <span className="product-category">
-            {product.category}
-          </span>
+          <Link
+            to={collectionPath}
+            className="product-category product-category-link"
+          >
+            {product.category} / {product.subcategory}
+          </Link>
 
           <h1>{product.name}</h1>
 
           <p className="product-price">
-            {product.price}
+            ₹{product.price.toLocaleString("en-IN")}
           </p>
 
           <p className="product-description">
@@ -141,30 +137,21 @@ const navigate = useNavigate();
           {/* ACTIONS */}
           <div className="product-actions">
 
- <button
-  className="add-to-bag"
-  onClick={() => {
-    addToCart(
-      {
-        id: productId,
-        name: product.name,
-        price: Number(
-          product.price.replace("₹", "").replace(",", "")
-        ),
-        image: product.image,
-        category: product.category,
-      },
-      quantity
-    );
-
-    navigate("/cart");
-  }}
->
+          <button className="add-to-bag" onClick={addProductToCart}>
   ADD TO BAG
 </button>
 
-            <button className="buy-now">
+            <button className="buy-now" onClick={addProductToCart}>
               BUY NOW
+            </button>
+
+            <button
+              className={`product-wishlist-button ${isWishlisted(product.id) ? "active" : ""}`}
+              onClick={() => toggleWishlist(product)}
+              aria-label={`${isWishlisted(product.id) ? "Remove" : "Add"} ${product.name} ${isWishlisted(product.id) ? "from" : "to"} wishlist`}
+              aria-pressed={isWishlisted(product.id)}
+            >
+              {isWishlisted(product.id) ? "♥" : "♡"}
             </button>
 
           </div>
@@ -177,6 +164,20 @@ const navigate = useNavigate();
         </div>
 
       </section>
+
+      {relatedProducts.length > 0 && (
+        <section className="related-products">
+          <div className="related-products-heading">
+            <span>MORE FROM {product.category.toUpperCase()}</span>
+            <h2>Continue exploring</h2>
+          </div>
+          <div className="product-grid related-grid">
+            {relatedProducts.map((relatedProduct) => (
+              <ProductCard key={relatedProduct.id} product={relatedProduct} />
+            ))}
+          </div>
+        </section>
+      )}
 
     </main>
   );

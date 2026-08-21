@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { useWishlist } from "../context/useWishlist";
 
 function ProductCard({ product }) {
+  const { isWishlisted, toggleWishlist } = useWishlist();
+  const wishlisted = isWishlisted(product.id);
+
   return (
     <Link
       to={`/product/${product.slug}`}
@@ -12,14 +16,20 @@ function ProductCard({ product }) {
         <img
           src={product.image}
           alt={product.name}
+          loading="lazy"
         />
 
         <button
           className="product-wishlist"
-          aria-label={`Add ${product.name} to wishlist`}
-          onClick={(event) => event.preventDefault()}
+          aria-label={`${wishlisted ? "Remove" : "Add"} ${product.name} ${wishlisted ? "from" : "to"} wishlist`}
+          aria-pressed={wishlisted}
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            toggleWishlist(product);
+          }}
         >
-          ♡
+          {wishlisted ? "♥" : "♡"}
         </button>
 
       </div>

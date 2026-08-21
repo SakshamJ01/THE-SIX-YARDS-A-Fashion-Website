@@ -1,31 +1,59 @@
 import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Link, Routes, Route } from "react-router-dom";
 import "./App.css";
 import CollectionPage from "./pages/CollectionPage";
+import CollectionsPage from "./pages/CollectionsPage";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
+import WishlistPage from "./pages/WishlistPage";
+import SearchPage from "./pages/SearchPage";
+import Carousel from "./components/Carousel";
+import StoreCard from "./components/StoreCard";
+import stores from "./data/stores";
+import StoresPage from "./pages/StoresPage";
+import StoreDetailPage from "./pages/StoreDetailPage";
+import { useCart } from "./context/useCart";
+import { useWishlist } from "./context/useWishlist";
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { cartCount } = useCart();
+  const { wishlistCount } = useWishlist();
 
   return (
     <div className="app">
       {/* ================= NAVBAR ================= */}
 <header className={`navbar ${menuOpen ? "menu-open" : ""}`}>
 
-  <a href="#" className="navbar-logo">
+  <Link to="/" className="navbar-logo">
     THE SIX YARDS
-  </a>
+  </Link>
 
   <nav className="navbar-links">
 
     <a href="#story">Our Story</a>
-    <a href="#collections">Collections</a>
+    <Link to="/collections">Collections</Link>
     <a href="#standard">Our Standard</a>
     <a href="#reels">Reels</a>
     <a href="#contact">Contact</a>
+    <Link to="/stores">Visit Us</Link>
 
   </nav>
+
+  <Link to="/cart" className="navbar-cart">
+  BAG
+  {cartCount > 0 && (
+    <span>({cartCount})</span>
+  )}
+</Link>
+
+  <Link to="/search" className="navbar-search">
+    SEARCH
+  </Link>
+
+  <Link to="/wishlist" className="navbar-wishlist">
+    SAVED {wishlistCount > 0 && `(${wishlistCount})`}
+  </Link>
 
   <button
     className="menu-button"
@@ -50,17 +78,29 @@ function App() {
 
       <nav className="mobile-menu-links">
 
-        <a href="#" onClick={() => setMenuOpen(false)}>
+        <Link to="/" onClick={() => setMenuOpen(false)}>
           Home
-        </a>
+        </Link>
+
+        <Link to="/cart" onClick={() => setMenuOpen(false)}>
+          Bag {cartCount > 0 && `(${cartCount})`}
+        </Link>
+
+        <Link to="/wishlist" onClick={() => setMenuOpen(false)}>
+          Saved {wishlistCount > 0 && `(${wishlistCount})`}
+        </Link>
+
+        <Link to="/search" onClick={() => setMenuOpen(false)}>
+          Search
+        </Link>
 
         <a href="#story" onClick={() => setMenuOpen(false)}>
           Our Story
         </a>
 
-        <a href="#collections" onClick={() => setMenuOpen(false)}>
+        <Link to="/collections" onClick={() => setMenuOpen(false)}>
           Collections
-        </a>
+        </Link>
 
         <a href="#standard" onClick={() => setMenuOpen(false)}>
           Our Standard
@@ -73,6 +113,10 @@ function App() {
         <a href="#contact" onClick={() => setMenuOpen(false)}>
           Contact
         </a>
+
+        <Link to="/stores" onClick={() => setMenuOpen(false)}>
+          Visit Us
+        </Link>
 
       </nav>
 
@@ -100,29 +144,31 @@ function App() {
       </div>
 
       {/* ================= HERO ================= */}
-<main>
+<main id="top">
   <section className="hero">
+    <div className="hero-image" aria-hidden="true"></div>
     <div className="hero-overlay"></div>
+    <div className="hero-frame" aria-hidden="true">
+      <span>THE ART OF THE DRAPE</span>
+      <span>01 / 04</span>
+    </div>
 
     <div className="hero-content">
       <p className="hero-eyebrow">THE SIX YARDS</p>
 
       <h1>
-        CONTEMPORARY
+        <span>Contemporary</span>
         <br />
-        ELEGANCE
-        <br />
-        IN SIX YARDS
+        <span className="hero-heading-accent">Elegance</span>
       </h1>
 
       <p className="hero-description">
-        Contemporary elegance rooted in the timeless
-        six yards.
+        A modern expression of the timeless six yards.
       </p>
 
-      <button className="hero-button">
-        EXPLORE COLLECTION
-      </button>
+      <Link to="/collections" className="hero-button">
+        EXPLORE COLLECTION <span>↗</span>
+      </Link>
     </div>
 
     <div className="hero-scroll">
@@ -148,10 +194,10 @@ function App() {
       DRAPE
     </h2>
 
-    <a href="#standard">
+    <Link to="/collections">
       EXPLORE COLLECTION
       <span>↗</span>
-    </a>
+    </Link>
   </div>
 
   <div className="campaign-side-text">
@@ -191,7 +237,7 @@ function App() {
     for the way India dresses today.
   </p>
 
-  <a href="#standard" className="story-link">
+  <a href="#story" className="story-link">
     DISCOVER OUR STORY
     <span>↗</span>
   </a>
@@ -244,10 +290,10 @@ function App() {
         beyond seasons.
       </p>
 
-      <a href="#collections">
+      <Link to="/collections">
         LEARN MORE
         <span>↗</span>
-      </a>
+      </Link>
     </div>
   </article>
 
@@ -264,10 +310,10 @@ function App() {
         every piece is chosen with intention.
       </p>
 
-      <a href="#collections">
+      <Link to="/collections">
         LEARN MORE
         <span>↗</span>
-      </a>
+      </Link>
     </div>
   </article>
 
@@ -284,10 +330,10 @@ function App() {
         the way a new generation wants to dress.
       </p>
 
-      <a href="#collections">
+      <Link to="/collections">
         LEARN MORE
         <span>↗</span>
-      </a>
+      </Link>
     </div>
   </article>
 
@@ -304,16 +350,16 @@ function App() {
         everything between — collections made for real moments.
       </p>
 
-      <a href="#collections">
+      <Link to="/collections">
         LEARN MORE
         <span>↗</span>
-      </a>
+      </Link>
     </div>
   </article>
 
 
   {/* 05 */}
-  <article className="standard-card">
+  <article className="standard-card standard-card-featured">
     <span className="standard-number">05</span>
 
     <div className="standard-card-content">
@@ -324,10 +370,10 @@ function App() {
         enduring quality without unnecessary excess.
       </p>
 
-      <a href="#collections">
+      <Link to="/collections">
         LEARN MORE
         <span>↗</span>
-      </a>
+      </Link>
     </div>
   </article>
 
@@ -364,7 +410,11 @@ function App() {
   </div>
 
 
-  <div className="reels-track">
+  <Carousel
+    itemsToShow={3}
+    gap={22}
+    ariaLabel="The Six Yards reels"
+  >
 
     {/* ================= REEL 01 ================= */}
 
@@ -497,15 +547,15 @@ function App() {
 
     </article>
 
-  </div>
+  </Carousel>
 
 
   <div className="reels-footer">
 
-    <a href="#collections">
+    <Link to="/collections">
       VIEW ALL STORIES
       <span>↗</span>
-    </a>
+    </Link>
 
   </div>
 
@@ -543,8 +593,9 @@ function App() {
 <article className="collection-card">
   <div className="collection-image">
     <img
-      src="/images/collection-sarees.jpg"
+      src="/images/collections/collection-womens-01.jpg"
       alt="The Six Yards women's wear collection"
+      loading="lazy"
     />
   </div>
 
@@ -558,10 +609,10 @@ function App() {
       </h3>
     </div>
 
-   <a href="/collections/womens-wear">
+  <Link to="/collections/womens-wear">
   EXPLORE
   <span>↗</span>
-</a>
+</Link>
   </div>
 </article>
 
@@ -570,8 +621,9 @@ function App() {
 <article className="collection-card">
   <div className="collection-image">
     <img
-      src="/images/collection-mens.jpg"
+      src="/images/collections/collection-mens-01.jpg"
       alt="The Six Yards men's wear collection"
+      loading="lazy"
     />
   </div>
 
@@ -585,10 +637,10 @@ function App() {
       </h3>
     </div>
 
-    <a href="/collections/mens-wear">
+    <Link to="/collections/mens-wear">
   EXPLORE
   <span>↗</span>
-</a>
+</Link>
   </div>
 </article>
 
@@ -597,8 +649,9 @@ function App() {
 <article className="collection-card">
   <div className="collection-image">
     <img
-    src="/images/collection-wedding.jpg"
+    src="/images/collections/collection-special-01.jpg"
       alt="The Six Yards special collections"
+      loading="lazy"
     />
   </div>
 
@@ -612,14 +665,36 @@ function App() {
       </h3>
     </div>
 
-    <a href="/collections/special-collections">
+    <Link to="/collections/special-collections">
   EXPLORE
   <span>↗</span>
-</a>
+</Link>
   </div>
 </article>
   </div>
 
+</section>
+
+{/* ================================
+    VISIT US
+================================ */}
+
+<section className="visit-section">
+  <div className="visit-intro">
+    <span>VISIT THE SIX YARDS</span>
+
+    <div>
+      <h2>Spaces where<br /><em>the story continues.</em></h2>
+      <p>Our demo locations are imagined as an extension of the Six Yards world: tactile, thoughtful and made for taking your time.</p>
+      <Link to="/stores">VIEW ALL STORES <span>↗</span></Link>
+    </div>
+  </div>
+
+  <Carousel itemsToShow={3} gap={24} ariaLabel="The Six Yards demo stores">
+    {stores.map((store, index) => (
+      <StoreCard key={store.id} store={store} index={index} />
+    ))}
+  </Carousel>
 </section>
 
 {/* ================================
@@ -683,7 +758,7 @@ function App() {
     FOOTER
 ================================ */}
 
-<footer className="footer">
+<footer id="contact" className="footer">
 
   <div className="footer-top">
 
@@ -705,10 +780,10 @@ function App() {
 
         <span>EXPLORE</span>
 
-        <a href="#">Home</a>
+        <Link to="/">Home</Link>
         <a href="#standard">Our Standard</a>
         <a href="#reels">Our Reels</a>
-        <a href="#">Our Story</a>
+        <a href="#story">Our Story</a>
 
       </div>
 
@@ -717,11 +792,11 @@ function App() {
 
   <span>COLLECTIONS</span>
 
-  <a href="/collections/womens-wear">Women's Wear</a>
-  <a href="/collections/mens-wear">Men's Wear</a>
-  <a href="/collections/special-collections">
+  <Link to="/collections/womens-wear">Women's Wear</Link>
+  <Link to="/collections/mens-wear">Men's Wear</Link>
+  <Link to="/collections/special-collections">
     Special Collections
-  </a>
+  </Link>
 
 </div>
 
@@ -729,10 +804,10 @@ function App() {
 
         <span>CONNECT</span>
 
-        <a href="#">Instagram</a>
-        <a href="#">Facebook</a>
-        <a href="#">Contact</a>
-        <a href="#">Visit Us</a>
+        <a href="https://www.instagram.com" target="_blank" rel="noreferrer">Instagram</a>
+        <a href="https://www.facebook.com" target="_blank" rel="noreferrer">Facebook</a>
+        <a href="#contact">Contact</a>
+        <Link to="/stores">Visit Us</Link>
 
       </div>
 
@@ -751,7 +826,7 @@ function App() {
       MADE WITH INTENTION
     </span>
 
-    <a href="#">
+    <a href="#top">
       BACK TO TOP ↑
     </a>
 
@@ -769,13 +844,18 @@ function AppRoutes() {
       <Route path="/" element={<App />} />
 
       <Route
+        path="/collections"
+        element={<CollectionsPage />}
+      />
+
+      <Route
         path="/collections/womens-wear"
         element={
           <CollectionPage
             title="Women's Wear"
             subtitle="Timeless silhouettes, contemporary expression."
             description="Discover sarees, graceful silhouettes and considered pieces designed for the modern woman."
-            heroImage="/images/collection-sarees.jpg"
+            heroImage="/images/collections/collection-womens-01.jpg"
           />
         }
       />
@@ -787,7 +867,7 @@ function AppRoutes() {
             title="Men's Wear"
             subtitle="Quiet confidence, rooted in tradition."
             description="Explore refined Indian menswear crafted for celebrations, occasions and everyday elegance."
-          heroImage="/images/collection-mens.jpg"
+          heroImage="/images/collections/collection-mens-01.jpg"
           />
         }
       />
@@ -799,7 +879,7 @@ function AppRoutes() {
             title="Special Collections"
             subtitle="Pieces made for moments worth remembering."
             description="Explore our curated edits of wedding, festive and heritage pieces."
-            heroImage="/images/collection-wedding.jpg"
+            heroImage="/images/collections/collection-special-01.jpg"
           />
         }
       />
@@ -811,6 +891,22 @@ function AppRoutes() {
 <Route
   path="/cart"
   element={<CartPage />}
+/>
+<Route
+  path="/wishlist"
+  element={<WishlistPage />}
+/>
+<Route
+  path="/search"
+  element={<SearchPage />}
+/>
+<Route
+  path="/stores"
+  element={<StoresPage />}
+/>
+<Route
+  path="/stores/:slug"
+  element={<StoreDetailPage />}
 />
 
     </Routes>

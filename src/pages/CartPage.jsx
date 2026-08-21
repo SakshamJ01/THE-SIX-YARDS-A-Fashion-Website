@@ -1,51 +1,108 @@
 import { Link } from "react-router-dom";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../context/useCart";
 import "./CartPage.css";
 
 function CartPage() {
   const {
     cartItems,
+    updateQuantity,
+    removeFromCart,
     cartCount,
     cartTotal,
-    removeFromCart,
-    updateQuantity,
   } = useCart();
 
   return (
     <main className="cart-page">
 
-      <div className="cart-header">
-        <span>THE SIX YARDS</span>
+      {/* ================= HEADER ================= */}
 
-        <h1>Your Bag</h1>
+      <section className="cart-header">
 
-        <p>
-          {cartCount} {cartCount === 1 ? "item" : "items"}
-        </p>
-      </div>
+        <div className="cart-header-top">
 
+          <Link to="/" className="cart-home-link">
+            ← BACK TO HOME
+          </Link>
+
+          <span className="cart-brand">
+            THE SIX YARDS
+          </span>
+
+          <Link
+            to="/collections"
+            className="cart-shop-link"
+          >
+            CONTINUE SHOPPING ↗
+          </Link>
+
+        </div>
+
+
+        <div className="cart-heading">
+
+          <span>THE SIX YARDS</span>
+
+          <h1>Your Bag</h1>
+
+          <p>
+            {cartCount} {cartCount === 1 ? "item" : "items"}
+          </p>
+
+        </div>
+
+      </section>
+
+
+      {/* ================= EMPTY CART ================= */}
 
       {cartItems.length === 0 ? (
 
-        <section className="empty-cart">
+        <section className="cart-empty">
 
-          <h2>Your bag is currently empty.</h2>
+          <span>YOUR BAG IS EMPTY</span>
+
+          <h2>
+            Nothing here
+            <br />
+            <em>yet.</em>
+          </h2>
 
           <p>
-            Discover pieces crafted with intention.
+            Discover pieces chosen for the way
+            you live, celebrate and remember.
           </p>
 
-          <Link to="/collections/womens-wear">
-            EXPLORE COLLECTIONS →
+          <Link
+            to="/collections"
+            className="cart-empty-button"
+          >
+            EXPLORE COLLECTIONS ↗
           </Link>
 
         </section>
 
       ) : (
 
+        /* ================= CART CONTENT ================= */
+
         <section className="cart-content">
 
+          {/* LEFT — PRODUCTS */}
+
           <div className="cart-items">
+
+            <div className="cart-items-heading">
+
+              <span>
+                YOUR SELECTION
+              </span>
+
+              <span>
+                {cartCount} {cartCount === 1 ? "ITEM" : "ITEMS"}
+              </span>
+
+            </div>
+
 
             {cartItems.map((item) => (
 
@@ -54,32 +111,43 @@ function CartPage() {
                 key={item.id}
               >
 
-                <div className="cart-item-image">
+                {/* IMAGE */}
 
+                <Link
+                  to={`/product/${item.slug}`}
+                  className="cart-item-image"
+                >
                   <img
                     src={item.image}
                     alt={item.name}
+                    loading="lazy"
                   />
+                </Link>
 
-                </div>
 
+                {/* INFORMATION */}
 
                 <div className="cart-item-info">
 
-                  <span>
+                  <span className="cart-item-category">
                     {item.category}
                   </span>
 
-                  <h2>
+                  <Link
+                    to={`/product/${item.slug}`}
+                    className="cart-item-name"
+                  >
                     {item.name}
-                  </h2>
+                  </Link>
 
-                  <p>
+                  <p className="cart-item-price">
                     ₹{item.price.toLocaleString("en-IN")}
                   </p>
 
 
-                  <div className="cart-item-controls">
+                  {/* QUANTITY + REMOVE */}
+
+                  <div className="cart-item-actions">
 
                     <div className="cart-quantity">
 
@@ -90,6 +158,7 @@ function CartPage() {
                             item.quantity - 1
                           )
                         }
+                        aria-label="Decrease quantity"
                       >
                         −
                       </button>
@@ -105,6 +174,7 @@ function CartPage() {
                             item.quantity + 1
                           )
                         }
+                        aria-label="Increase quantity"
                       >
                         +
                       </button>
@@ -113,7 +183,7 @@ function CartPage() {
 
 
                     <button
-                      className="remove-item"
+                      className="cart-remove"
                       onClick={() =>
                         removeFromCart(item.id)
                       }
@@ -126,12 +196,15 @@ function CartPage() {
                 </div>
 
 
-                <strong className="cart-item-total">
-                  ₹
-                  {(
+                {/* ITEM TOTAL */}
+
+                <div className="cart-item-total">
+
+                  ₹{(
                     item.price * item.quantity
                   ).toLocaleString("en-IN")}
-                </strong>
+
+                </div>
 
               </article>
 
@@ -140,53 +213,74 @@ function CartPage() {
           </div>
 
 
+          {/* RIGHT — SUMMARY */}
+
           <aside className="cart-summary">
 
-            <span>ORDER SUMMARY</span>
+            <div className="cart-summary-inner">
 
-            <div className="summary-row">
-
-              <p>Subtotal</p>
-
-              <strong>
-                ₹{cartTotal.toLocaleString("en-IN")}
-              </strong>
-
-            </div>
-
-
-            <div className="summary-row">
-
-              <p>Shipping</p>
-
-              <span>
-                Calculated at checkout
+              <span className="cart-summary-label">
+                ORDER SUMMARY
               </span>
 
+
+              <div className="cart-summary-row">
+
+                <span>
+                  Subtotal
+                </span>
+
+                <strong>
+                  ₹{cartTotal.toLocaleString("en-IN")}
+                </strong>
+
+              </div>
+
+
+              <div className="cart-summary-row cart-shipping">
+
+                <span>
+                  Shipping
+                </span>
+
+                <span>
+                  Calculated at checkout
+                </span>
+
+              </div>
+
+
+              <div className="cart-summary-divider"></div>
+
+
+              <div className="cart-total-row">
+
+                <span>
+                  Total
+                </span>
+
+                <strong>
+                  ₹{cartTotal.toLocaleString("en-IN")}
+                </strong>
+
+              </div>
+
+
+              <button
+                className="checkout-button"
+                onClick={() =>
+                  alert("Checkout will be available soon.")
+                }
+              >
+                PROCEED TO CHECKOUT
+              </button>
+
+
+              <p className="cart-summary-note">
+                Secure checkout · Crafted with care
+              </p>
+
             </div>
-
-
-            <div className="summary-total">
-
-              <p>Total</p>
-
-              <strong>
-                ₹{cartTotal.toLocaleString("en-IN")}
-              </strong>
-
-            </div>
-
-
-            <button className="checkout-button">
-              PROCEED TO CHECKOUT
-            </button>
-
-            <Link
-              to="/collections/womens-wear"
-              className="continue-shopping"
-            >
-              ← CONTINUE SHOPPING
-            </Link>
 
           </aside>
 
