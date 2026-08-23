@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./ProductPage.css";
 import { useCart } from "../context/useCart";
@@ -12,9 +12,10 @@ import Footer from "../components/Footer";
 function ProductPage() {
   const { productId } = useParams();
   const [quantity, setQuantity] = useState(1);
- const { addToCart } = useCart();
- const { isWishlisted, toggleWishlist } = useWishlist();
-const navigate = useNavigate();
+  const [addedToBag, setAddedToBag] = useState(false);
+  const { addToCart } = useCart();
+  const { isWishlisted, toggleWishlist } = useWishlist();
+  const navigate = useNavigate();
   const product = products.find((item) => item.slug === productId);
   const collectionPath = product
     ? {
@@ -29,7 +30,22 @@ const navigate = useNavigate();
       ).slice(0, 3)
     : [];
 
-  const addProductToCart = () => {
+  useEffect(() => {
+    if (!addedToBag) {
+      return undefined;
+    }
+
+    const timer = window.setTimeout(() => setAddedToBag(false), 2200);
+
+    return () => window.clearTimeout(timer);
+  }, [addedToBag]);
+
+  const addProductToBag = () => {
+    addToCart(product, quantity);
+    setAddedToBag(true);
+  };
+
+  const buyProductNow = () => {
     addToCart(product, quantity);
     navigate("/cart");
   };
@@ -144,11 +160,14 @@ const navigate = useNavigate();
           {/* ACTIONS */}
           <div className="product-actions">
 
-          <button className="add-to-bag" onClick={addProductToCart}>
-  ADD TO BAG
-</button>
+          <button
+            className={`add-to-bag ${addedToBag ? "added" : ""}`}
+            onClick={addProductToBag}
+          >
+            {addedToBag ? "ADDED TO BAG ✓" : "ADD TO BAG"}
+          </button>
 
-            <button className="buy-now" onClick={addProductToCart}>
+            <button className="buy-now" onClick={buyProductNow}>
               BUY NOW
             </button>
 
@@ -164,9 +183,11 @@ const navigate = useNavigate();
           </div>
 
 
-          <p className="product-note">
-            Crafted with care. Made to be worn and remembered.
-          </p>
+          <ul className="product-perks">
+            <li>Complimentary shipping</li>
+            <li>Easy 7-day returns</li>
+            <li>Secure checkout</li>
+          </ul>
 
         </div>
 

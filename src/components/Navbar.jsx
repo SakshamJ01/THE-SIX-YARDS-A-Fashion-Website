@@ -67,7 +67,7 @@ function Navbar({ variant = "overlay" }) {
         <Link to="/collections">Collections</Link>
         {sectionLink("standard", "Our Standard")}
         {sectionLink("reels", "Reels")}
-        {sectionLink("contact", "Contact")}
+        <Link to="/contact">Contact</Link>
         <Link to="/stores">Visit Us</Link>
       </nav>
 
@@ -133,7 +133,9 @@ function Navbar({ variant = "overlay" }) {
 
             {sectionLink("reels", "Reels")}
 
-            {sectionLink("contact", "Contact")}
+            <Link to="/contact" onClick={closeMenu}>
+              Contact
+            </Link>
 
             <Link to="/stores" onClick={closeMenu}>
               Visit Us

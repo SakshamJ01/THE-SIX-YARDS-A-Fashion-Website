@@ -819,6 +819,32 @@
 
     padding: 30px 25px;
   }
+
+  /* STORY — collapse two-column grid */
+
+  .story-section {
+    grid-template-columns: 1fr;
+
+    gap: 32px;
+
+    padding: 90px 7vw 100px;
+  }
+
+  .story-content h2 {
+    font-size: clamp(46px, 13vw, 78px);
+  }
+
+  .story-description {
+    margin-top: 30px;
+
+    font-size: 15px;
+  }
+
+  /* HERO — account for mobile navbar (64px) + promo bar (34px) */
+
+  .hero {
+    min-height: calc(100svh - 98px);
+  }
 }
 @media (max-width: 500px) {
   .promotion-bar {
@@ -830,7 +856,7 @@
   }
 
   .hero {
-    min-height: 80vh;
+    min-height: calc(100svh - 98px);
   }
 
   .hero-frame {

@@ -80,7 +80,7 @@ function Footer() {
 
             <a href="https://www.instagram.com" target="_blank" rel="noreferrer">Instagram</a>
             <a href="https://www.facebook.com" target="_blank" rel="noreferrer">Facebook</a>
-            {sectionLink("contact", "Contact")}
+            <Link to="/contact">Contact</Link>
             <Link to="/stores">Visit Us</Link>
 
           </div>

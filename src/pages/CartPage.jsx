@@ -4,6 +4,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./CartPage.css";
 
+const FREE_SHIPPING_THRESHOLD = 10000;
+
 function CartPage() {
   const {
     cartItems,
@@ -12,6 +14,15 @@ function CartPage() {
     cartCount,
     cartTotal,
   } = useCart();
+
+  const shippingRemaining = Math.max(
+    0,
+    FREE_SHIPPING_THRESHOLD - cartTotal
+  );
+  const shippingProgress = Math.min(
+    100,
+    Math.round((cartTotal / FREE_SHIPPING_THRESHOLD) * 100)
+  );
 
   return (
     <>
@@ -249,8 +260,37 @@ function CartPage() {
                 </span>
 
                 <span>
-                  Calculated at checkout
+                  {shippingRemaining === 0
+                    ? "Free"
+                    : "Calculated at checkout"}
                 </span>
+
+              </div>
+
+
+              <div className="cart-shipping-progress">
+
+                <p className="cart-shipping-message">
+                  {shippingRemaining > 0 ? (
+                    <>
+                      You're{" "}
+                      <strong>
+                        ₹{shippingRemaining.toLocaleString("en-IN")}
+                      </strong>{" "}
+                      away from complimentary shipping
+                    </>
+                  ) : (
+                    <span className="unlocked">
+                      ✓ Complimentary shipping unlocked
+                    </span>
+                  )}
+                </p>
+
+                <div className="cart-shipping-bar">
+                  <span
+                    style={{ width: `${shippingProgress}%` }}
+                  ></span>
+                </div>
 
               </div>
 

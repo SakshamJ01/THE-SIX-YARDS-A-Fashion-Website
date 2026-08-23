@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 import stores from "./data/stores";
 import StoresPage from "./pages/StoresPage";
 import StoreDetailPage from "./pages/StoreDetailPage";
+import ContactPage from "./pages/ContactPage";
 
 const TESTIMONIALS = [
   {
@@ -788,6 +789,12 @@ function AppRoutes() {
       <Route
         path="/stores/:slug"
         element={<StoreDetailPage />}
+      />
+
+      {/* Contact */}
+      <Route
+        path="/contact"
+        element={<ContactPage />}
       />
 
       {/* 404 — unknown routes */}
