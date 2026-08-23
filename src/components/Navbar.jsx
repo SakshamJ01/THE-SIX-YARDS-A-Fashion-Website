@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { useCart } from "../context/useCart";
@@ -12,6 +12,7 @@ function scrollToSection(sectionId) {
 
 function Navbar({ variant = "overlay" }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
   const { cartCount } = useCart();
   const { wishlistCount } = useWishlist();
   const navigate = useNavigate();
@@ -26,6 +27,36 @@ function Navbar({ variant = "overlay" }) {
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape" && menuOpen) {
+        closeMenu();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 900 && menuOpen) {
+        closeMenu();
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [menuOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuOpen && menuRef.current && !menuRef.current.contains(event.target)) {
+        closeMenu();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [menuOpen]);
 
   const handleSectionClick = (event, sectionId) => {
     event.preventDefault();
@@ -50,6 +81,7 @@ function Navbar({ variant = "overlay" }) {
 
   return (
     <header
+      ref={menuRef}
       className={[
         "navbar",
         variant === "solid" ? "navbar-solid" : "",

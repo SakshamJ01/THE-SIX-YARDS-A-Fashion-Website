@@ -4,6 +4,7 @@ import { useCart } from "../context/useCart";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./WishlistPage.css";
+import { ImageWithSkeleton } from "../components/withSkeleton";
 
 function WishlistPage() {
   const { wishlistItems, removeFromWishlist } = useWishlist();
@@ -77,7 +78,7 @@ function WishlistPage() {
                     to={`/product/${product.slug}`}
                     className="wishlist-item-image"
                   >
-                    <img
+                    <ImageWithSkeleton
                       src={product.image}
                       alt={product.name}
                       loading="lazy"

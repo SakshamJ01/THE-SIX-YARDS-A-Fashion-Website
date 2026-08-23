@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useWishlist } from "../context/useWishlist";
+import "./ProductCard.css";
+import { ImageWithSkeleton } from "../components/withSkeleton";
 
 function ProductCard({ product }) {
   const { isWishlisted, toggleWishlist } = useWishlist();
@@ -13,7 +15,7 @@ function ProductCard({ product }) {
 
       <div className="product-image">
 
-        <img
+        <ImageWithSkeleton
           src={product.image}
           alt={product.name}
           loading="lazy"

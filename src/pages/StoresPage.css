@@ -132,7 +132,7 @@
 }
 
 .stores-filters button {
-  min-height: 38px;
+  min-height: 44px;
   padding: 0 16px;
   border: 1px solid rgba(23, 21, 19, 0.2);
   border-radius: var(--radius-sm);

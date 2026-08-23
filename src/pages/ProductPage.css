@@ -333,7 +333,8 @@
   }
 
   .product-page .product-image {
-    height: 75vh;
+    height: 65vh;
+    min-height: 420px;
   }
 
   .product-page .product-info {
@@ -426,7 +427,20 @@
     flex-basis: auto !important;
     width: 54px !important;
     height: 54px;
-    align-self: flex-start;
+    align-self: center;
+  }
+
+  .product-page .quantity-controls {
+    height: 44px;
+  }
+
+  .product-page .quantity-controls button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .product-page .quantity-controls span {
+    width: 44px;
   }
 
   .related-grid {

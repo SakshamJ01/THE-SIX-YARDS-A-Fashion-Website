@@ -7,6 +7,7 @@ import products from "../data/products";
 import ProductCard from "../components/ProductCard";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { ImageWithSkeleton } from "../components/withSkeleton";
 
 
 function ProductPage() {
@@ -88,7 +89,7 @@ function ProductPage() {
 
         {/* IMAGE */}
         <div className="product-image">
-          <img
+          <ImageWithSkeleton
             src={product.image}
             alt={product.name}
             loading="eager"

@@ -12,6 +12,7 @@ function Carousel({
   const [canGoPrevious, setCanGoPrevious] = useState(false);
   const [canGoNext, setCanGoNext] = useState(false);
   const itemCount = Children.count(children);
+  const touchStartX = useRef(null);
 
   const updateArrowState = () => {
     const track = trackRef.current;
@@ -70,6 +71,23 @@ function Carousel({
     }
   };
 
+  const handleTouchStart = (event) => {
+    touchStartX.current = event.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (event) => {
+    if (touchStartX.current === null) return;
+
+    const touchEndX = event.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+
+    if (Math.abs(diff) > 50) {
+      move(diff > 0 ? 1 : -1);
+    }
+
+    touchStartX.current = null;
+  };
+
   return (
     <div
       className="carousel"
@@ -106,6 +124,8 @@ function Carousel({
         className="carousel-track"
         tabIndex="0"
         onKeyDown={handleKeyDown}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         aria-live="polite"
       >
         {Children.map(children, (child) => (

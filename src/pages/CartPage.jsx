@@ -3,6 +3,7 @@ import { useCart } from "../context/useCart";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./CartPage.css";
+import { ImageWithSkeleton } from "../components/withSkeleton";
 
 const FREE_SHIPPING_THRESHOLD = 10000;
 
@@ -133,7 +134,7 @@ function CartPage() {
                   to={`/product/${item.slug}`}
                   className="cart-item-image"
                 >
-                  <img
+                  <ImageWithSkeleton
                     src={item.image}
                     alt={item.name}
                     loading="lazy"

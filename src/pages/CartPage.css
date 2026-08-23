@@ -140,7 +140,7 @@
 .cart-item {
   display: grid;
 
-  grid-template-columns: 190px minmax(0, 1fr) auto;
+  grid-template-columns: 190px minmax(0, 1fr) auto auto;
 
   gap: 30px;
 
@@ -317,6 +317,8 @@
   font-size: 13px;
 
   white-space: nowrap;
+
+  order: 4;
 }
 
 
@@ -639,14 +641,14 @@
   }
 
   .cart-item-total {
-    position: absolute;
-
-    top: 32px;
-    right: 0;
+    position: static;
+    order: 3;
+    padding-top: 8px;
+    text-align: right;
   }
 
   .cart-item-name {
-    padding-right: 45px;
+    padding-right: 0;
 
     font-size: 25px;
   }
@@ -660,12 +662,12 @@
   }
 
   .cart-quantity {
-    height: 42px;
+    height: 44px;
   }
 
   .cart-quantity button {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
 
   .cart-summary-inner {
@@ -675,5 +677,4 @@
   .cart-empty {
     padding: 80px 6vw;
   }
-
 }

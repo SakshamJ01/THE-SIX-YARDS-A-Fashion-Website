@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import "./StoreCard.css";
+import { ImageWithSkeleton } from "../components/withSkeleton";
 
 function StoreCard({ store, index = 0 }) {
   return (
     <article className="store-card">
       <Link to={`/stores/${store.slug}`} className="store-card-image-link">
         <div className="store-card-image">
-          <img src={store.image} alt={`${store.name} demo store`} loading="lazy" />
+          <ImageWithSkeleton src={store.image} alt={`${store.name} demo store`} loading="lazy" />
           <span className="store-card-number">{String(index + 1).padStart(2, "0")}</span>
           <span className="store-card-arrow" aria-hidden="true">↗</span>
         </div>
