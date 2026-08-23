@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import products from "../data/products";
 import ProductCard from "../components/ProductCard";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import "./SearchPage.css";
 
 function SearchPage() {
@@ -16,7 +18,10 @@ function SearchPage() {
     : [];
 
   return (
-    <main className="search-page">
+    <>
+      <main className="search-page">
+      <Navbar variant="solid" />
+
       <header className="search-header">
         <div className="search-header-top">
           <Link to="/" className="search-home-link">← BACK TO HOME</Link>
@@ -34,7 +39,6 @@ function SearchPage() {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Sarees, kurtas, heritage..."
-            autoFocus
           />
         </div>
       </header>
@@ -69,7 +73,10 @@ function SearchPage() {
           </div>
         )}
       </section>
-    </main>
+      </main>
+
+      <Footer />
+    </>
   );
 }
 

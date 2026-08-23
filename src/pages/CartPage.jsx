@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../context/useCart";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import "./CartPage.css";
 
 function CartPage() {
@@ -12,7 +14,10 @@ function CartPage() {
   } = useCart();
 
   return (
-    <main className="cart-page">
+    <>
+      <main className="cart-page">
+
+      <Navbar variant="solid" />
 
       {/* ================= HEADER ================= */}
 
@@ -288,7 +293,10 @@ function CartPage() {
 
       )}
 
-    </main>
+      </main>
+
+      <Footer />
+    </>
   );
 }
 

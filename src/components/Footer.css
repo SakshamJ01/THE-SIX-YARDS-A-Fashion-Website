@@ -1,0 +1,271 @@
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+  background: #111;
+  color: #f5f2ed;
+
+  padding: 120px 8vw 35px;
+}
+
+
+/* =========================================
+   FOOTER TOP
+========================================= */
+
+.footer-top {
+  display: grid;
+
+  grid-template-columns: 2fr 3fr;
+
+  gap: 100px;
+
+  padding-bottom: 110px;
+}
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+.footer-brand h2 {
+  margin: 0;
+
+  max-width: 430px;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(60px, 6vw, 95px);
+
+  line-height: 0.82;
+
+  font-weight: 400;
+
+  letter-spacing: -0.055em;
+}
+
+.footer-brand p {
+  max-width: 360px;
+
+  margin-top: 45px;
+
+  color: #888;
+
+  font-size: 16px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.footer-navigation {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 55px;
+}
+
+
+/* =========================================
+   FOOTER COLUMNS
+========================================= */
+
+.footer-column {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.footer-column span {
+  margin-bottom: 28px;
+
+  color: #b78338;
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.25em;
+
+  text-transform: uppercase;
+}
+
+.footer-column a {
+  display: block;
+
+  width: fit-content;
+
+  margin-bottom: 16px;
+
+  color: #aaa;
+
+  font-size: 15px;
+
+  line-height: 1.4;
+
+  text-decoration: none;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.footer-column a:hover {
+  color: #f5f2ed;
+
+  transform: translateX(3px);
+}
+
+
+/* =========================================
+   FOOTER BOTTOM
+========================================= */
+
+.footer-bottom {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr 1fr;
+
+  align-items: center;
+
+  padding-top: 28px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+  color: #777;
+
+  font-size: 10px;
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+}
+
+.footer-bottom > *:nth-child(2) {
+  text-align: center;
+}
+
+.footer-bottom > *:last-child {
+  text-align: right;
+}
+
+.footer-bottom a {
+  color: #aaa;
+
+  text-decoration: none;
+
+  transition: color 0.3s ease;
+}
+
+.footer-bottom a:hover {
+  color: #f5f2ed;
+}
+
+.footer-back-to-top {
+  justify-self: end;
+
+  padding: 0;
+
+  border: none;
+  background: none;
+
+  color: #aaa;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+
+  cursor: pointer;
+
+  transition: color 0.3s ease;
+}
+
+.footer-back-to-top:hover {
+  color: #f5f2ed;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  .footer {
+    padding: 90px 7vw 30px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+
+    gap: 70px;
+
+    padding-bottom: 75px;
+  }
+
+  .footer-navigation {
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 30px;
+  }
+
+  .footer-brand h2 {
+    font-size: clamp(55px, 15vw, 85px);
+  }
+
+  .footer-brand p {
+    margin-top: 30px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .footer {
+    padding: 75px 6vw 25px;
+  }
+
+  .footer-top {
+    gap: 55px;
+  }
+
+  .footer-brand h2 {
+    font-size: 60px;
+
+    line-height: 0.84;
+  }
+
+  .footer-navigation {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 45px 25px;
+  }
+
+  .footer-column:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .footer-bottom {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+
+    text-align: left;
+  }
+
+  .footer-bottom > *:nth-child(2),
+  .footer-bottom > *:last-child {
+    text-align: left;
+  }
+
+}
+

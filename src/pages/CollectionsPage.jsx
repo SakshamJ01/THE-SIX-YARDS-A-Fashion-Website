@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import "./CollectionsPage.css";
 
 const collections = [
@@ -27,7 +29,10 @@ const collections = [
 
 function CollectionsPage() {
   return (
-    <main className="collections-landing-page">
+    <>
+      <main className="collections-landing-page">
+      <Navbar variant="solid" />
+
       <header className="collections-landing-header">
         <div className="collections-landing-top">
           <Link to="/" className="collections-home-link">← BACK TO HOME</Link>
@@ -60,7 +65,10 @@ function CollectionsPage() {
           </article>
         ))}
       </section>
-    </main>
+      </main>
+
+      <Footer />
+    </>
   );
 }
 

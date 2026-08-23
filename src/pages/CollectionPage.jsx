@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "./CollectionPage.css";
 import products from "../data/products";
 import ProductCard from "../components/ProductCard";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 function CollectionPage({ title, subtitle, description, heroImage }) {
   const [activeSubcategory, setActiveSubcategory] = useState("All");
@@ -20,6 +22,8 @@ function CollectionPage({ title, subtitle, description, heroImage }) {
 
   return (
     <div className="collection-page">
+
+      <Navbar variant="solid" />
 
       <div className="collection-page-back">
         <Link to="/">← BACK TO HOME</Link>
@@ -86,6 +90,7 @@ function CollectionPage({ title, subtitle, description, heroImage }) {
 
       </section>
 
+      <Footer />
     </div>
   );
 }

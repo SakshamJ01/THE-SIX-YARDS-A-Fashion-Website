@@ -1,5 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import stores from "../data/stores";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import "./StoreDetailPage.css";
 
 function StoreDetailPage() {
@@ -8,17 +10,26 @@ function StoreDetailPage() {
 
   if (!store) {
     return (
-      <main className="store-detail-page store-detail-not-found">
-        <span>THE SIX YARDS</span>
-        <h1>Store not found.</h1>
-        <Link to="/stores">BACK TO STORES ↗</Link>
-      </main>
+      <>
+        <main className="store-detail-page store-detail-not-found">
+          <Navbar variant="solid" />
+
+          <span>THE SIX YARDS</span>
+          <h1>Store not found.</h1>
+          <Link to="/stores">BACK TO STORES ↗</Link>
+        </main>
+
+        <Footer />
+      </>
     );
   }
 
   return (
-    <main className="store-detail-page">
-      <div className="store-detail-back">
+    <>
+      <main className="store-detail-page">
+        <Navbar variant="solid" />
+
+        <div className="store-detail-back">
         <Link to="/stores">← BACK TO STORES</Link>
         <Link to="/">HOME</Link>
       </div>
@@ -53,7 +64,10 @@ function StoreDetailPage() {
       </div>
 
       <p className="store-demo-note">Demo location shown for presentation only. Confirmed store information will be added when available.</p>
-    </main>
+      </main>
+
+      <Footer />
+    </>
   );
 }
 

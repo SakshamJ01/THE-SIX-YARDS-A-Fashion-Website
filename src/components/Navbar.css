@@ -1,0 +1,384 @@
+/* ================================
+   NAVBAR
+================================ */
+
+.navbar {
+  position: absolute;
+  top: 34px;
+  left: 0;
+
+  width: 100%;
+  height: 80px;
+
+  padding: 0 5vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  z-index: 100;
+}
+
+.navbar-logo {
+  color: #f5f2ed !important;
+  text-decoration: none !important;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+
+  white-space: nowrap;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.navbar-links a {
+  color: #f5f2ed;
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  transition: opacity var(--duration-fast) ease;
+}
+
+.navbar-links a:hover {
+  opacity: 0.65;
+}
+
+.menu-button {
+  display: none;
+
+  background: transparent;
+  border: none;
+
+  width: 35px;
+  cursor: pointer;
+}
+
+.menu-button span {
+  display: block;
+  height: 1px;
+  background: white;
+  margin: 7px 0;
+}
+
+/* ================================
+   NAVBAR CART / SEARCH / WISHLIST
+================================ */
+
+.navbar-cart,
+.navbar-search,
+.navbar-wishlist {
+  color: inherit;
+  text-decoration: none;
+
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  transition: opacity var(--duration-fast) ease;
+}
+
+.navbar-cart {
+  margin-left: 28px;
+}
+
+.navbar-search,
+.navbar-wishlist {
+  margin-left: 24px;
+}
+
+.navbar-cart:hover,
+.navbar-search:hover,
+.navbar-wishlist:hover {
+  opacity: 0.55;
+}
+
+.navbar-cart span {
+  margin-left: 4px;
+}
+
+/* ================================
+   SOLID VARIANT — SUB PAGES
+   Hidden on desktop, shown on mobile
+================================ */
+
+.navbar-solid {
+  display: none;
+}
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+.mobile-menu {
+  display: none;
+}
+
+/* =========================================================
+   MOBILE NAVBAR
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .navbar {
+    position: relative;
+    top: auto;
+
+    width: 100%;
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 6vw;
+
+    background: #171615;
+
+    z-index: 1000;
+  }
+
+  /* Solid variant appears on sub pages (mobile only) */
+
+  .navbar-solid {
+    display: flex;
+  }
+
+  .navbar-logo {
+    position: relative;
+    z-index: 1002;
+
+    color: white;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+  }
+
+  .navbar-links {
+    display: none !important;
+  }
+
+  .navbar-cart,
+  .navbar-search,
+  .navbar-wishlist {
+    display: none;
+  }
+
+
+  /* ================================
+     MENU BUTTON
+  ================================ */
+
+  .menu-button {
+    position: relative;
+    z-index: 1002;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex !important;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+  }
+
+  .menu-button span {
+    display: block;
+
+    width: 24px;
+    height: 1px;
+
+    margin: 0;
+
+    background: white;
+
+    transition:
+      transform 0.4s ease,
+      width 0.4s ease;
+  }
+
+
+  /* ================================
+     MOBILE MENU PANEL
+  ================================ */
+
+  .mobile-menu {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1001;
+
+    display: flex;
+
+    background: #171615;
+
+    color: #f5f2ed;
+
+    visibility: hidden;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform: translateY(-20px);
+
+    transition:
+      opacity 0.45s ease,
+      transform 0.45s ease,
+      visibility 0.45s ease;
+  }
+
+
+  .mobile-menu-inner {
+    width: 100%;
+
+    min-height: 100%;
+
+    padding:
+      120px
+      7vw
+      35px;
+
+    display: flex;
+
+    flex-direction: column;
+  }
+
+
+  .mobile-menu-label {
+    color: #a87932;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.22em;
+  }
+
+
+  /* ================================
+     LINKS
+  ================================ */
+
+  .mobile-menu-links {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-top: 55px;
+  }
+
+  .mobile-menu-links a {
+    color: #f5f2ed;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size: clamp(42px, 11vw, 62px);
+
+    font-weight: 400;
+
+    line-height: 0.95;
+
+    letter-spacing: -0.045em;
+
+    text-decoration: none;
+
+    transition:
+      color 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .mobile-menu-links a:hover {
+    color: #b78338;
+
+    transform: translateX(6px);
+  }
+
+
+  /* ================================
+     MENU FOOTER
+  ================================ */
+
+  .mobile-menu-footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: auto;
+
+    padding-top: 30px;
+
+    border-top:
+      1px solid rgba(255,255,255,0.15);
+
+    color: #777;
+
+    font-size: 8px;
+
+    letter-spacing: 0.18em;
+  }
+
+
+  /* ================================
+     OPEN STATE
+  ================================ */
+
+  .navbar.menu-open .mobile-menu {
+    visibility: visible;
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+    transform: translateY(0);
+  }
+
+
+  /* Hamburger → X */
+
+  .navbar.menu-open .menu-button span:first-child {
+    transform:
+      translateY(3.5px)
+      rotate(45deg);
+  }
+
+  .navbar.menu-open .menu-button span:last-child {
+    transform:
+      translateY(-3.5px)
+      rotate(-45deg);
+  }
+
+}

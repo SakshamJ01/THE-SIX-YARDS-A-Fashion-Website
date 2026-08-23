@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import { useWishlist } from "../context/useWishlist";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import "./WishlistPage.css";
 
 function WishlistPage() {
   const { wishlistItems } = useWishlist();
 
   return (
-    <main className="wishlist-page">
+    <>
+      <main className="wishlist-page">
+      <Navbar variant="solid" />
+
       <section className="wishlist-header">
         <div className="wishlist-header-top">
           <Link to="/" className="wishlist-home-link">
@@ -52,7 +57,10 @@ function WishlistPage() {
           </div>
         </section>
       )}
-    </main>
+      </main>
+
+      <Footer />
+    </>
   );
 }
 

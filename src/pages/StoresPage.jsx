@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Carousel from "../components/Carousel";
 import StoreCard from "../components/StoreCard";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import stores from "../data/stores";
 import "./StoresPage.css";
 
@@ -13,7 +15,10 @@ function StoresPage() {
     : stores.filter((store) => store.city === activeCity);
 
   return (
-    <main className="stores-page">
+    <>
+      <main className="stores-page">
+      <Navbar variant="solid" />
+
       <div className="stores-page-back">
         <Link to="/">← BACK TO HOME</Link>
       </div>
@@ -72,7 +77,10 @@ function StoresPage() {
         <h2>Visit us.<br /><em>Take your time.</em></h2>
         <Link to="/collections">EXPLORE THE COLLECTION <span>↗</span></Link>
       </section>
-    </main>
+      </main>
+
+      <Footer />
+    </>
   );
 }
 

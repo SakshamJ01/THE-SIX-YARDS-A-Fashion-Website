@@ -5,6 +5,8 @@ import { useCart } from "../context/useCart";
 import { useWishlist } from "../context/useWishlist";
 import products from "../data/products";
 import ProductCard from "../components/ProductCard";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 
 function ProductPage() {
@@ -36,6 +38,8 @@ const navigate = useNavigate();
   if (!product) {
     return (
       <div className="product-not-found">
+        <Navbar variant="solid" />
+
         <h1>Product Not Found</h1>
 
         <Link to="/">
@@ -49,7 +53,10 @@ const navigate = useNavigate();
   }
 
   return (
-    <main className="product-page">
+    <>
+      <main className="product-page">
+
+      <Navbar variant="solid" />
 
       {/* BACK LINK */}
       <div className="product-back">
@@ -179,7 +186,10 @@ const navigate = useNavigate();
         </section>
       )}
 
-    </main>
+      </main>
+
+      <Footer />
+    </>
   );
 }
 

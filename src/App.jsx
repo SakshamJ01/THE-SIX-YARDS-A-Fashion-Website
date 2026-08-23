@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Routes, Route } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import CollectionPage from "./pages/CollectionPage";
 import CollectionsPage from "./pages/CollectionsPage";
@@ -7,129 +7,72 @@ import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import WishlistPage from "./pages/WishlistPage";
 import SearchPage from "./pages/SearchPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import Carousel from "./components/Carousel";
 import StoreCard from "./components/StoreCard";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import stores from "./data/stores";
 import StoresPage from "./pages/StoresPage";
 import StoreDetailPage from "./pages/StoreDetailPage";
-import { useCart } from "./context/useCart";
-import { useWishlist } from "./context/useWishlist";
+
+const TESTIMONIALS = [
+  {
+    quote:
+      "The Six Yards makes traditional fashion feel beautifully effortless. Every detail feels considered, from the fabric to the final drape.",
+    author: "PRIYA S.",
+    role: "The Six Yards customer",
+  },
+  {
+    quote:
+      "My heritage silk saree arrived beautifully packed and even better in person. It has become my go-to for every celebration.",
+    author: "ANANYA R.",
+    role: "The Six Yards customer",
+  },
+  {
+    quote:
+      "Finally a place where classic weaves meet modern styling. The curation is thoughtful and the quality speaks for itself.",
+    author: "RAHUL M.",
+    role: "The Six Yards customer",
+  },
+];
+
+function useSectionNavigation() {
+  const navigate = useNavigate();
+
+  return (sectionId) => {
+    if (window.location.pathname !== "/") {
+      navigate("/");
+      window.setTimeout(() => {
+        document
+          .getElementById(sectionId)
+          ?.scrollIntoView({ behavior: "smooth" });
+      }, 120);
+    } else {
+      document
+        .getElementById(sectionId)
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+}
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const { cartCount } = useCart();
-  const { wishlistCount } = useWishlist();
+  const navigateToSection = useSectionNavigation();
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
+
+  const testimonial = TESTIMONIALS[testimonialIndex];
+
+  const showPreviousTestimonial = () =>
+    setTestimonialIndex(
+      (index) => (index - 1 + TESTIMONIALS.length) % TESTIMONIALS.length
+    );
+
+  const showNextTestimonial = () =>
+    setTestimonialIndex((index) => (index + 1) % TESTIMONIALS.length);
 
   return (
     <div className="app">
-      {/* ================= NAVBAR ================= */}
-<header className={`navbar ${menuOpen ? "menu-open" : ""}`}>
-
-  <Link to="/" className="navbar-logo">
-    THE SIX YARDS
-  </Link>
-
-  <nav className="navbar-links">
-
-    <a href="#story">Our Story</a>
-    <Link to="/collections">Collections</Link>
-    <a href="#standard">Our Standard</a>
-    <a href="#reels">Reels</a>
-    <a href="#contact">Contact</a>
-    <Link to="/stores">Visit Us</Link>
-
-  </nav>
-
-  <Link to="/cart" className="navbar-cart">
-  BAG
-  {cartCount > 0 && (
-    <span>({cartCount})</span>
-  )}
-</Link>
-
-  <Link to="/search" className="navbar-search">
-    SEARCH
-  </Link>
-
-  <Link to="/wishlist" className="navbar-wishlist">
-    SAVED {wishlistCount > 0 && `(${wishlistCount})`}
-  </Link>
-
-  <button
-    className="menu-button"
-    onClick={() => setMenuOpen(!menuOpen)}
-    aria-label={menuOpen ? "Close menu" : "Open menu"}
-    aria-expanded={menuOpen}
-  >
-    <span></span>
-    <span></span>
-  </button>
-
-
-  {/* ================= MOBILE MENU ================= */}
-
-  <div className="mobile-menu">
-
-    <div className="mobile-menu-inner">
-
-      <div className="mobile-menu-label">
-        THE SIX YARDS
-      </div>
-
-      <nav className="mobile-menu-links">
-
-        <Link to="/" onClick={() => setMenuOpen(false)}>
-          Home
-        </Link>
-
-        <Link to="/cart" onClick={() => setMenuOpen(false)}>
-          Bag {cartCount > 0 && `(${cartCount})`}
-        </Link>
-
-        <Link to="/wishlist" onClick={() => setMenuOpen(false)}>
-          Saved {wishlistCount > 0 && `(${wishlistCount})`}
-        </Link>
-
-        <Link to="/search" onClick={() => setMenuOpen(false)}>
-          Search
-        </Link>
-
-        <a href="#story" onClick={() => setMenuOpen(false)}>
-          Our Story
-        </a>
-
-        <Link to="/collections" onClick={() => setMenuOpen(false)}>
-          Collections
-        </Link>
-
-        <a href="#standard" onClick={() => setMenuOpen(false)}>
-          Our Standard
-        </a>
-
-        <a href="#reels" onClick={() => setMenuOpen(false)}>
-          Reels
-        </a>
-
-        <a href="#contact" onClick={() => setMenuOpen(false)}>
-          Contact
-        </a>
-
-        <Link to="/stores" onClick={() => setMenuOpen(false)}>
-          Visit Us
-        </Link>
-
-      </nav>
-
-      <div className="mobile-menu-footer">
-        <span>CONTEMPORARY ELEGANCE</span>
-        <span>IN SIX YARDS</span>
-      </div>
-
-    </div>
-
-  </div>
-
-</header>
+      <Navbar />
 
       {/* ================= PROMOTION BAR ================= */}
       <div className="promotion-bar">
@@ -237,8 +180,15 @@ function App() {
     for the way India dresses today.
   </p>
 
-  <a href="#story" className="story-link">
-    DISCOVER OUR STORY
+  <a
+    href="#standard"
+    className="story-link"
+    onClick={(event) => {
+      event.preventDefault();
+      navigateToSection("standard");
+    }}
+  >
+    DISCOVER OUR STANDARD
     <span>↗</span>
   </a>
 
@@ -246,7 +196,6 @@ function App() {
 
 </section>
 
-        {/* ================= WHY CHOOSE US ================= */}
         {/* ================= STANDARD ================= */}
 <section id="standard" className="standard-section">
 
@@ -428,6 +377,7 @@ function App() {
           muted
           loop
           playsInline
+          preload="metadata"
         />
 
         <div className="reel-overlay">
@@ -472,6 +422,7 @@ function App() {
           muted
           loop
           playsInline
+          preload="metadata"
         />
 
         <div className="reel-overlay">
@@ -516,6 +467,7 @@ function App() {
           muted
           loop
           playsInline
+          preload="metadata"
         />
 
         <div className="reel-overlay">
@@ -707,30 +659,30 @@ function App() {
 
     <span>WHY PEOPLE CHOOSE US</span>
 
-    <span>01 / 03</span>
+    <span>
+      {String(testimonialIndex + 1).padStart(2, "0")} /{" "}
+      {String(TESTIMONIALS.length).padStart(2, "0")}
+    </span>
 
   </div>
 
 
-  <div className="testimonial-content">
+  <div className="testimonial-content" aria-live="polite">
 
     <div className="testimonial-quote-mark">
       “
     </div>
 
     <blockquote>
-      The Six Yards makes traditional fashion
-      feel beautifully effortless. Every detail
-      feels considered, from the fabric to the
-      final drape.
+      {testimonial.quote}
     </blockquote>
 
     <div className="testimonial-author">
 
-      <strong>PRIYA S.</strong>
+      <strong>{testimonial.author}</strong>
 
       <span>
-        The Six Yards customer
+        {testimonial.role}
       </span>
 
     </div>
@@ -740,11 +692,17 @@ function App() {
 
   <div className="testimonial-controls">
 
-    <button aria-label="Previous testimonial">
+    <button
+      aria-label="Previous testimonial"
+      onClick={showPreviousTestimonial}
+    >
       ←
     </button>
 
-    <button aria-label="Next testimonial">
+    <button
+      aria-label="Next testimonial"
+      onClick={showNextTestimonial}
+    >
       →
     </button>
 
@@ -754,85 +712,7 @@ function App() {
 
 </main>
 
-{/* ================================
-    FOOTER
-================================ */}
-
-<footer id="contact" className="footer">
-
-  <div className="footer-top">
-
-    <div className="footer-brand">
-
-      <h2>THE SIX YARDS</h2>
-
-      <p>
-        Contemporary elegance rooted in
-        the timeless six yards.
-      </p>
-
-    </div>
-
-
-    <div className="footer-navigation">
-
-      <div className="footer-column">
-
-        <span>EXPLORE</span>
-
-        <Link to="/">Home</Link>
-        <a href="#standard">Our Standard</a>
-        <a href="#reels">Our Reels</a>
-        <a href="#story">Our Story</a>
-
-      </div>
-
-
-   <div className="footer-column">
-
-  <span>COLLECTIONS</span>
-
-  <Link to="/collections/womens-wear">Women's Wear</Link>
-  <Link to="/collections/mens-wear">Men's Wear</Link>
-  <Link to="/collections/special-collections">
-    Special Collections
-  </Link>
-
-</div>
-
-      <div className="footer-column">
-
-        <span>CONNECT</span>
-
-        <a href="https://www.instagram.com" target="_blank" rel="noreferrer">Instagram</a>
-        <a href="https://www.facebook.com" target="_blank" rel="noreferrer">Facebook</a>
-        <a href="#contact">Contact</a>
-        <Link to="/stores">Visit Us</Link>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div className="footer-bottom">
-
-    <span>
-      © THE SIX YARDS
-    </span>
-
-    <span>
-      MADE WITH INTENTION
-    </span>
-
-    <a href="#top">
-      BACK TO TOP ↑
-    </a>
-
-  </div>
-
-</footer>
+<Footer />
     </div>
   );
 }
@@ -840,7 +720,7 @@ function App() {
 function AppRoutes() {
   return (
     <Routes>
-{/* Collection pages */}
+      {/* Home */}
       <Route path="/" element={<App />} />
 
       <Route
@@ -883,31 +763,38 @@ function AppRoutes() {
           />
         }
       />
-{/* Product page */}
-<Route
-  path="/product/:productId"
-  element={<ProductPage />}
-/>
-<Route
-  path="/cart"
-  element={<CartPage />}
-/>
-<Route
-  path="/wishlist"
-  element={<WishlistPage />}
-/>
-<Route
-  path="/search"
-  element={<SearchPage />}
-/>
-<Route
-  path="/stores"
-  element={<StoresPage />}
-/>
-<Route
-  path="/stores/:slug"
-  element={<StoreDetailPage />}
-/>
+
+      {/* Product page */}
+      <Route
+        path="/product/:productId"
+        element={<ProductPage />}
+      />
+      <Route
+        path="/cart"
+        element={<CartPage />}
+      />
+      <Route
+        path="/wishlist"
+        element={<WishlistPage />}
+      />
+      <Route
+        path="/search"
+        element={<SearchPage />}
+      />
+      <Route
+        path="/stores"
+        element={<StoresPage />}
+      />
+      <Route
+        path="/stores/:slug"
+        element={<StoreDetailPage />}
+      />
+
+      {/* 404 — unknown routes */}
+      <Route
+        path="*"
+        element={<NotFoundPage />}
+      />
 
     </Routes>
   );
